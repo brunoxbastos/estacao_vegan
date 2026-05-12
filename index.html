@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Estação Vegana — Comida vegana congelada de verdade, direto pra sua casa." />
+  <title>Estação Vegana</title>
+  <link rel="stylesheet" href="src/css/main.css" />
+</head>
+<body>
+
+  <!-- Menu Overlay -->
+  <div id="menu-overlay" class="menu-overlay menu-overlay--hidden">
+    <div class="menu-overlay__header">
+      <span class="menu-overlay__logo">estação vegana</span>
+      <button id="close-menu" class="menu-overlay__close" aria-label="Fechar menu">
+        <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/>
+        </svg>
+      </button>
+    </div>
+    <nav class="menu-overlay__nav">
+      <a href="produtos.html" data-menu-link class="menu-overlay__link">CARDÁPIO</a>
+      <a href="#sobre"        data-menu-link class="menu-overlay__link">SOBRE</a>
+      <a href="#footer"       data-menu-link class="menu-overlay__link">CONTATO</a>
+      <a href="#footer"       data-menu-link class="menu-overlay__link">POLÍTICA DE ENTREGA</a>
+    </nav>
+    <div class="menu-overlay__footer">
+      <span class="menu-overlay__handle">@estacaovegana</span>
+    </div>
+  </div>
+
+  <!-- Header -->
+  <header class="header">
+    <div class="header__inner">
+      <button id="open-menu" class="header__menu-btn" aria-label="Abrir menu">
+        <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+          <path stroke-linecap="round" d="M3 6h18M3 12h18M3 18h18"/>
+        </svg>
+      </button>
+      <a href="index.html" class="header__logo">estação vegana</a>
+      <div class="header__icons">
+        <a href="cesta.html" class="header__icon-btn" aria-label="Cesta de compras">
+          <svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"/>
+          </svg>
+          <span id="cart-count" class="header__cart-badge hidden">0</span>
+        </a>
+        <a href="login.html" class="header__icon-btn" aria-label="Minha conta">
+          <svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/>
+          </svg>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="hero__bg">
+      <img id="hero-bg" src="/public/assets/hero.png" alt="Mulher comendo bowl vegano em casa" />
+    </div>
+    <div class="hero__content">
+      <div class="hero__card glass">
+        <h1 class="hero__title">COMIDA DE VERDADE<br/>NO SEU FREEZER</h1>
+        <p class="hero__subtitle">Pratos veganos congelados feitos com cuidado. Você aquece, come e repete.</p>
+        <a href="produtos.html" class="btn-primary">MONTAR MEU PEDIDO →</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Benefits Bar -->
+  <div class="benefits-bar">
+    <div class="benefits-track">
+      <span>🌿 100% vegano</span>
+      <span>✋ Sem conservantes</span>
+      <span>🚚 Entrega em Brasília</span>
+      <span>❄️ 90 dias de validade</span>
+      <span>🌿 100% vegano</span>
+      <span>✋ Sem conservantes</span>
+      <span>🚚 Entrega em Brasília</span>
+      <span>❄️ 90 dias de validade</span>
+    </div>
+  </div>
+
+  <!-- Promoções -->
+  <section class="section fade-in">
+    <div class="section__inner">
+      <h2 class="section-label">APROVEITA ESSA SEMANA</h2>
+      <a href="produtos.html#kits" class="promo-main">
+        <div class="promo-main__bg">
+          <img src="/public/assets/1 inicio.png" alt="kit estreia"/>
+        </div>
+        <div class="promo-main__body">
+          <span class="promo-main__tag">Kit Estreia</span>
+          <h3 class="promo-main__title">10% off<br/>essa semana</h3>
+          <p class="promo-main__desc">3 pratos + 10 salgados + 1 condimento</p>
+          <div class="promo-main__prices">
+            <span class="promo-main__old">R$ 99,90</span>
+            <span class="promo-main__new">R$ 89,90</span>
+          </div>
+        </div>
+      </a>
+      <div class="promo-grid">
+        <a href="produtos.html" class="promo-card promo-card--menta">
+          <span class="promo-card__emoji">🚚</span>
+          <div>
+            <h3 class="promo-card__title">Frete grátis acima de R$ 120</h3>
+            <p class="promo-card__desc">Monte seu pedido da semana</p>
+          </div>
+        </a>
+        <a href="produtos.html#lanches" class="promo-card promo-card--laranja">
+          <span class="promo-card__emoji">🎉</span>
+          <div>
+            <h3 class="promo-card__title">Kit Lanche Fest</h3>
+            <p class="promo-card__desc">20 salgados variados</p>
+            <p class="promo-card__price">R$ 89,90</p>
+          </div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Para cada momento -->
+  <section class="section section--muted fade-in">
+    <div class="section__inner">
+      <h2 class="section-label">PARA CADA MOMENTO DO SEU DIA</h2>
+      <div class="moment-grid">
+        <a href="produtos.html#pratos" class="moment-card moment-card--full">
+          <img src="public/assets/momento-almoco.jpg" alt="Almoço do dia a dia" />
+          <div class="moment-card__overlay">
+            <h3 class="moment-card__title">ALMOÇO<br/>DO DIA A DIA</h3>
+            <p class="moment-card__sub">Aquece em 4 minutos e serve como se tivesse cozinhado o dia todo.</p>
+          </div>
+        </a>
+        <a href="produtos.html#lanches" class="moment-card moment-card--half moment-card--teal">
+          <img src="public/assets/momento-festa.jpg" alt="Reunião e festa" />
+          <div class="moment-card__overlay">
+            <h3 class="moment-card__title">REUNIÃO<br/>E FESTA</h3>
+          </div>
+        </a>
+        <a href="produtos.html#kits" class="moment-card moment-card--half moment-card--forest">
+          <img src="public/assets/momento-semana.jpg" alt="Semana resolvida" />
+          <div class="moment-card__overlay">
+            <h3 class="moment-card__title">SEMANA<br/>RESOLVIDA</h3>
+          </div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Sobre -->
+  <section id="sobre" class="section fade-in">
+    <div class="section__inner">
+      <h2 class="section-label">SOBRE</h2>
+      <div class="sobre-image">
+        <img src="public/assets/sobre-cozinha.jpg" alt="Equipe Estação Vegana na cozinha" />
+      </div>
+      <div class="sobre-card">
+        <p class="sobre-card__text">A Estação Vegana nasceu da crença de que comer bem não deveria ser complicado. Que comida vegana pode ser afetiva, generosa e gostosa — sem precisar convencer ninguém de nada.</p>
+        <p class="sobre-card__text">Cada prato é feito com ingredientes de verdade, congelado no ponto certo e entregue pra você aquecer quando quiser. Sem conservantes. Só comida feita com cuidado.</p>
+        <a href="produtos.html" class="btn-primary">CONHEÇA NOSSO CARDÁPIO →</a>
+      </div>
+      <div class="testimonial">
+        <div class="testimonial__stars">★★★★★</div>
+        <blockquote class="testimonial__text">"Nunca pensei que ia amar tanto um prato vegano. O strogonoff tem um sabor absurdo, parece que foi feito na hora. Já pedi três vezes esse mês."</blockquote>
+        <cite class="testimonial__author">— Camila R., Asa Sul</cite>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer id="footer" class="footer">
+    <div class="footer__inner">
+      <p class="footer__logo">estação vegana</p>
+      <div class="footer__grid">
+        <div>
+          <h4 class="footer__col-title">Navegação</h4>
+          <ul class="footer__links">
+            <li><a href="produtos.html">Cardápio</a></li>
+            <li><a href="#sobre">Sobre</a></li>
+            <li><a href="#footer">Contato</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="footer__col-title">Contato</h4>
+          <ul class="footer__links">
+            <li>📞 61-999.999.999</li>
+            <li>📱 @estacaovegana</li>
+            <li>📍 Brasília, DF</li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer__bottom">
+        <span class="footer__credit">Todos os direitos reservados</span>
+        <span class="footer__credit">designer Bruno Silva Bastos</span>
+      </div>
+    </div>
+  </footer>
+
+  <script type="module" src="src/ts/index.ts"></script>
+</body>
+</html>
