@@ -1,34 +1,26 @@
 // ═══════════════════════════════════════════════════════
-// main.ts — Funcionalidades compartilhadas (todos os pages)
-// Estação Vegana
+// main.js — Estação Vegana
+// JavaScript puro — sem dependências
 // ═══════════════════════════════════════════════════════
 
-import '../css/main.css'
-
-// ── Tipos ────────────────────────────────────────────────
-export interface CartItem {
-  id: string
-  name: string
-  price: number
-  quantity: number
-  image?: string
-}
+// Ativa animações só quando JS está disponível
+document.documentElement.classList.add('js-ready')
 
 // ── Menu Mobile ──────────────────────────────────────────
-export function initMenu(): void {
-  const overlay   = document.getElementById('menu-overlay')
-  const btnOpen   = document.getElementById('open-menu')
-  const btnClose  = document.getElementById('close-menu')
-  const menuLinks = document.querySelectorAll<HTMLAnchorElement>('[data-menu-link]')
+function initMenu() {
+  const overlay  = document.getElementById('menu-overlay')
+  const btnOpen  = document.getElementById('open-menu')
+  const btnClose = document.getElementById('close-menu')
+  const menuLinks = document.querySelectorAll('[data-menu-link]')
 
   if (!overlay) return
 
-  const open = (): void => {
+  function open() {
     overlay.classList.remove('menu-overlay--hidden')
     document.body.style.overflow = 'hidden'
   }
 
-  const close = (): void => {
+  function close() {
     overlay.classList.add('menu-overlay--hidden')
     document.body.style.overflow = ''
   }
@@ -37,48 +29,44 @@ export function initMenu(): void {
   btnClose?.addEventListener('click', close)
   menuLinks.forEach(link => link.addEventListener('click', close))
 
-  // Fechar com Escape
-  document.addEventListener('keydown', (e: KeyboardEvent) => {
+  document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape') close()
   })
 }
 
 // ── Scroll Fade-In ───────────────────────────────────────
-export function initScrollFade(): void {
-  const elements = document.querySelectorAll<HTMLElement>('.fade-in')
+function initScrollFade() {
+  const elements = document.querySelectorAll('.fade-in')
 
-  const observer = new IntersectionObserver(
-    (entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('fade-in--visible')
-          observer.unobserve(entry.target)
-        }
-      })
-    },
-    { threshold: 0.1 }
-  )
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('fade-in--visible')
+        observer.unobserve(entry.target)
+      }
+    })
+  }, { threshold: 0.1 })
 
   elements.forEach(el => observer.observe(el))
 }
 
 // ── Carrinho (localStorage) ──────────────────────────────
-export const Cart = {
-  getItems(): CartItem[] {
+const Cart = {
+  getItems() {
     try {
       const raw = localStorage.getItem('ev_cart')
-      return raw ? (JSON.parse(raw) as CartItem[]) : []
+      return raw ? JSON.parse(raw) : []
     } catch {
       return []
     }
   },
 
-  saveItems(items: CartItem[]): void {
+  saveItems(items) {
     localStorage.setItem('ev_cart', JSON.stringify(items))
     window.dispatchEvent(new Event('cart-updated'))
   },
 
-  addItem(item: Omit<CartItem, 'quantity'>): void {
+  addItem(item) {
     const items = this.getItems()
     const existing = items.find(i => i.id === item.id)
     if (existing) {
@@ -89,12 +77,12 @@ export const Cart = {
     this.saveItems(items)
   },
 
-  removeItem(id: string): void {
+  removeItem(id) {
     const items = this.getItems().filter(i => i.id !== id)
     this.saveItems(items)
   },
 
-  updateQuantity(id: string, quantity: number): void {
+  updateQuantity(id, quantity) {
     const items = this.getItems()
     const item = items.find(i => i.id === id)
     if (!item) return
@@ -106,24 +94,24 @@ export const Cart = {
     this.saveItems(items)
   },
 
-  getTotal(): number {
+  getTotal() {
     return this.getItems().reduce((sum, i) => sum + i.price * i.quantity, 0)
   },
 
-  getCount(): number {
+  getCount() {
     return this.getItems().reduce((sum, i) => sum + i.quantity, 0)
   },
 
-  clear(): void {
+  clear() {
     this.saveItems([])
   },
 }
 
 // ── Cart Badge (header) ──────────────────────────────────
-export function initCartBadge(): void {
+function initCartBadge() {
   const badge = document.getElementById('cart-count')
 
-  const update = (): void => {
+  function update() {
     if (!badge) return
     const count = Cart.getCount()
     badge.textContent = String(count)
@@ -136,7 +124,7 @@ export function initCartBadge(): void {
 }
 
 // ── Formatar valor em BRL ────────────────────────────────
-export function formatCurrency(value: number): string {
+function formatCurrency(value) {
   return value.toLocaleString('pt-BR', {
     style: 'currency',
     currency: 'BRL',
@@ -144,30 +132,41 @@ export function formatCurrency(value: number): string {
 }
 
 // ── Toast de notificação ─────────────────────────────────
-export function showToast(message: string, type: 'success' | 'error' = 'success'): void {
+function showToast(message, type = 'success') {
   const existing = document.getElementById('ev-toast')
   existing?.remove()
 
   const toast = document.createElement('div')
   toast.id = 'ev-toast'
-  toast.className = [
-    'fixed bottom-6 left-1/2 -translate-x-1/2 z-50',
-    'px-5 py-3 rounded-full shadow-lg',
-    'font-onest font-medium text-sm text-white',
-    'transition-all duration-300 opacity-0 translate-y-4',
-    type === 'success' ? 'bg-verde-agua' : 'bg-red-500',
-  ].join(' ')
+  toast.className = 'toast toast--' + type
   toast.textContent = message
 
   document.body.appendChild(toast)
 
   requestAnimationFrame(() => {
-    toast.classList.remove('opacity-0', 'translate-y-4')
-    toast.classList.add('opacity-100', 'translate-y-0')
+    toast.classList.add('toast--visible')
   })
 
   setTimeout(() => {
-    toast.classList.add('opacity-0', 'translate-y-4')
+    toast.classList.remove('toast--visible')
     setTimeout(() => toast.remove(), 300)
   }, 2500)
 }
+
+// ── Hero parallax suave ──────────────────────────────────
+function initHeroParallax() {
+  const heroBg = document.getElementById('hero-bg')
+  if (!heroBg) return
+
+  window.addEventListener('scroll', () => {
+    heroBg.style.transform = `translateY(${window.scrollY * 0.3}px)`
+  }, { passive: true })
+}
+
+// ── Init ─────────────────────────────────────────────────
+document.addEventListener('DOMContentLoaded', () => {
+  initMenu()
+  initScrollFade()
+  initCartBadge()
+  initHeroParallax()
+})
