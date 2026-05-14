@@ -2,7 +2,7 @@ import { defineConfig } from 'vite'
 import { resolve } from 'path'
 
 export default defineConfig({
-  base: '/estacao-vegana/',
+  base: '/estacao_vegan/',
   build: {
     rollupOptions: {
       input: {
