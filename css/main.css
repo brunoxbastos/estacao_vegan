@@ -576,6 +576,15 @@ ol {
   padding: var(--space-4);
 }
 
+.promo-card--first {
+  grid-column: 1 / -1;
+  min-height: 200px;
+  margin: var(--space-1) 0;
+}
+.promo-card--first 
+.promo-card__body 
+{ width: 50%; }
+
 /* Tipografia dentro dos cards */
 .promo-main__tag {
   font-family: var(--font-onest);
@@ -609,20 +618,21 @@ ol {
   margin-top: var(--space-3);
 }
 
-.promo-main__old {
+.promo-card__price_old {
   text-decoration: line-through;
   color: rgba(250, 250, 242, 0.40);
   font-size: var(--text-sm);
 }
 
-.promo-main__new {
+.promo-card__price_new {
   font-family: var(--font-onest);
   font-weight: 700;
   font-size: var(--text-2xl);
   color: var(--color-laranja);
 }
 
-.promo-card__title {
+.promo-card__title,
+.promo-card__title-hover {
   font-family: var(--font-onest);
   font-weight: 400;
   font-size: var(--text-xl);
