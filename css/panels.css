@@ -384,10 +384,12 @@
 /* Corpo scrollável */
 .product-modal__body {
   flex: 1;
+  min-height: 0;
   overflow-y: auto;
-  padding: var(--space-5) var(--space-5) 6rem;
+  padding: var(--space-5);
   scrollbar-width: thin;
   scrollbar-color: var(--color-verde-agua) transparent;
+  position: relative;
 }
 
 .product-modal__name {
@@ -409,14 +411,14 @@
 .product-modal__section-title {
   font-family: var(--font-onest);
   font-weight: 700;
-  font-size: var(--text-xs);
+  font-size: var(--text-base);
   letter-spacing: 0.1em;
   text-transform: uppercase;
   color: var(--color-laranja);
   margin-top: var(--space-6);
   margin-bottom: var(--space-3);
-  padding-bottom: var(--space-2);
-  border-bottom: 2px solid var(--color-laranja);
+  padding-bottom: var(--space-1);
+  border-bottom: 1px solid var(--color-laranja);
 }
 
 .product-modal__ingredient {
@@ -437,16 +439,46 @@
 }
 
 /* Reviews carrossel */
+.product-modal__reviews-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  margin-top: var(--space-3);
+}
+
 .product-modal__reviews {
   display: flex;
   gap: var(--space-3);
   overflow-x: auto;
   scrollbar-width: none;
   padding-bottom: var(--space-2);
-  margin-top: var(--space-3);
+  flex: 1;
 }
 
 .product-modal__reviews::-webkit-scrollbar { display: none; }
+
+.reviews-nav {
+  flex-shrink: 0;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: 1.5px solid var(--color-verde-floresta);
+  background: var(--color-off-white);
+  color: var(--color-verde-floresta);
+  font-size: 1.25rem;
+  line-height: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s;
+}
+
+.reviews-nav:hover {
+  background: var(--color-verde-floresta);
+  color: var(--color-off-white);
+}
 
 .review-card {
   flex-shrink: 0;
@@ -480,10 +512,7 @@
 
 /* Barra fixa de adicionar */
 .product-modal__add-bar {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
+  flex-shrink: 0;
   background-color: rgba(250, 250, 242, 0.97);
   backdrop-filter: blur(8px);
   padding: var(--space-4) var(--space-5);
@@ -561,10 +590,11 @@
 
   .product-modal__sheet {
     max-width: 860px;
-    max-height: 90vh;
+    height: min(90vh, 700px);
     border-radius: var(--radius-2xl);
     display: grid;
     grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr auto;
     transform: scale(0.94) translateY(20px);
     opacity: 0;
     transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1),
@@ -579,19 +609,30 @@
   /* Handle some no desktop */
   .product-modal__handle { display: none; }
 
-  /* Imagem ocupa coluna esquerda inteira */
+  /* Imagem ocupa coluna esquerda inteira (ambas as linhas) */
   .product-modal__image {
     aspect-ratio: unset;
     height: 100%;
     border-radius: var(--radius-2xl) 0 0 var(--radius-2xl);
-    grid-row: 1;
+    grid-column: 1;
+    grid-row: 1 / 3;
   }
 
-  /* Corpo na coluna direita, com botão fechar no topo */
+  /* Corpo na coluna direita, linha 1 */
   .product-modal__body {
-    padding: var(--space-8) var(--space-6) 6rem var(--space-6);
+    padding: var(--space-8) var(--space-6) var(--space-4) var(--space-6);
+    grid-column: 2;
     grid-row: 1;
     position: relative;
+    overflow-y: auto;
+    min-height: 0;
+  }
+
+  /* Barra de adicionar na coluna direita, linha 2 */
+  .product-modal__add-bar {
+    grid-column: 2;
+    grid-row: 2;
+    border-radius: 0 0 var(--radius-2xl) 0;
   }
 
   /* Botão fechar (desktop, dentro do modal) */

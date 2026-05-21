@@ -51,7 +51,7 @@ function initScrollFade() {
 }
 
 // ── Carrinho (localStorage) ──────────────────────────────
-const Cart = {
+export const Cart = {
   getItems() {
     try {
       const raw = localStorage.getItem('ev_cart')
@@ -124,7 +124,7 @@ function initCartBadge() {
 }
 
 // ── Formatar valor em BRL ────────────────────────────────
-function formatCurrency(value) {
+export function formatCurrency(value) {
   return value.toLocaleString('pt-BR', {
     style: 'currency',
     currency: 'BRL',
@@ -132,7 +132,7 @@ function formatCurrency(value) {
 }
 
 // ── Toast de notificação ─────────────────────────────────
-function showToast(message, type = 'success') {
+export function showToast(message, type = 'success') {
   const existing = document.getElementById('ev-toast')
   existing?.remove()
 
